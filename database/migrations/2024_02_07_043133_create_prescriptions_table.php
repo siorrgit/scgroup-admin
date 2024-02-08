@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
-            // $table->image();
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->string('image');
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('number');
             // $table->foreignId('prescription_id')->constrained();
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
