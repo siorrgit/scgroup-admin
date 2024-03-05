@@ -10,11 +10,19 @@ class ShopController extends Controller
 {
     public function index()
     {
-        // $orders = Order::all();
         $shops = Shop::all();
 
-        return view('shop', [
+        return view('shop/index', [
             'shops' => $shops
+        ]);
+    }
+
+    public function show(string $id)
+    {
+        $shop = Shop::find($id);
+
+        return view('shop/detail', [
+            'shop' => $shop
         ]);
     }
 }

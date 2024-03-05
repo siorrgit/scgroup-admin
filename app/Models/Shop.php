@@ -18,8 +18,8 @@ class Shop extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
-        'shopID',
         'postcode',
         'address',
         'tel',
@@ -30,6 +30,10 @@ class Shop extends Authenticatable
         'email',
         'password',
     ];
+
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * The attributes that should be hidden for serialization.
