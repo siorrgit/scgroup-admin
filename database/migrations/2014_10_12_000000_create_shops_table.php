@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('shops', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('name');
-            $table->string('shopID');
             $table->char('postcode', 7);
             $table->string('address');
             $table->string('tel');
