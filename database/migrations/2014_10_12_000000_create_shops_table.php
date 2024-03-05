@@ -13,9 +13,16 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('area_id')->constrained()->nullable();
             $table->string('name');
-            // 事前決済が可能かどうか
-            // $table->xxxxxx();
+            $table->string('shopID');
+            $table->char('postcode', 7);
+            $table->string('address');
+            $table->string('tel');
+            $table->text('hours')->nullable();
+            $table->text('holiday')->nullable();
+            $table->text('note')->nullable();
+            $table->boolean('payable')->default(true);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
