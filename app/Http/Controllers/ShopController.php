@@ -25,4 +25,11 @@ class ShopController extends Controller
             'shop' => $shop
         ]);
     }
+
+    public function post()
+    {
+
+        return view('shop/add', [
+        ]);
+    }
 }

@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
 
     // 店舗
     Route::get('/shop', [ShopController::class, 'index']);
+    Route::get('/shop/add', function () {
+        return view('shop.add');
+    });
     Route::get('/shop/{id}', [ShopController::class, 'show']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
