@@ -56,7 +56,7 @@
               <input type="radio" name="payable" id="payable" value="1" class="w-3 h-3" />可
             </label>
             <label for="non-payable" class="flex items-center justify-center gap-x-2 text-sm">
-              <input type="radio" name="payable" id="non-payable" value="0" class="w-3 h-3" />不可
+              <input type="radio" name="non-payable" id="non-payable" value="0" class="w-3 h-3" />不可
             </label>
           </div>
         </div>
