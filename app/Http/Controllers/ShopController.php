@@ -17,7 +17,7 @@ class ShopController extends Controller
         ]);
     }
 
-    public function show(string $id)
+    public function edit(string $id)
     {
         $shop = Shop::find($id);
 
@@ -26,10 +26,17 @@ class ShopController extends Controller
         ]);
     }
 
-    public function post()
+    public function create()
     {
+        return view('shop/detail');
+    }
 
-        return view('shop/add', [
+    public function store(Request $request)
+    {
+        $shop = Shop::create($request->all());
+
+        return view('shop/detail', [
+            'shop' => $shop
         ]);
     }
 }
