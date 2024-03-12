@@ -47,8 +47,7 @@
         </div>
         <div class="flex justify-start items-center gap-x-5 p-2 w-full">
           <x-forms.label for="password" class="w-32" :value="__('パスワード：')" />
-          <x-forms.text-input type="password" id="password" name="password" value="{{ $shop ? $shop->password : '' }}"
-            required />
+          <x-forms.text-input type="password" id="password" name="password" />
         </div>
         <div class="flex justify-start items-center gap-x-5 p-2 w-full">
           <x-forms.label for="postcode" class="w-32" :value="__('郵便番号：')" />
