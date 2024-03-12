@@ -29,7 +29,7 @@ class ShopController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): View
     {
         $areas = Area::all();
 
@@ -38,9 +38,27 @@ class ShopController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): View
     {
-        $shop = Shop::create($request->all());
+        $request->validate([
+            'id' => 'required|alpha_num:ascii|unique:shops|max:32',
+        ]);
+
+        $shop = Shop::create([
+            'id' => $request->id,
+            'area_id' => $request->area_id,
+            'name' => $request->name,
+            'postcode' => $request->postcode,
+            'address' => $request->address,
+            'tel' => $request->tel,
+            'hours' => $request->hours,
+            'holiday' => $request->holiday,
+            'note' => $request->note,
+            'payable' => $request->payable,
+            'email' => $request->id . '@shohousen.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make($request->password),
+        ]);
 
         return view('shop/detail', [
             'shop' => $shop
