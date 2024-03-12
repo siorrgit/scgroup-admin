@@ -26,11 +26,11 @@
 
 
         <div class="flex justify-start items-center gap-x-5 p-2 w-full">
-          <x-forms.label for="aria_id" class="w-32" :value="__('エリア：')" />
-          <select name="aria_id" class="w-full rounded border border-gray-300 text-gray-700 text-sm" required>
-            <option name="aria_id" value="">選択してください</option>
+          <x-forms.label for="area_id" class="w-32" :value="__('エリア：')" />
+          <select name="area_id" class="w-full rounded border border-gray-300 text-gray-700 text-sm" required>
+            <option name="area_id" value="">選択してください</option>
             @foreach ($areas as $area)
-              <option name="aria_id" value="{{ $area->id }}" @if ($shop && $area->id == $shop->area_id) selected @endif>
+              <option name="area_id" value="{{ $area->id }}" @if ($shop && $area->id == $shop->area_id) selected @endif>
                 {{ $area->name }}</option>
             @endforeach
           </select>
@@ -92,7 +92,7 @@
           <div class="flex justify-start gap-x-5 w-full">
             <label for="payable" class="flex items-center justify-center gap-x-2 text-sm">
               <input type="radio" name="payable" id="payable" value="1" class="w-3 h-3"
-                @if ($shop && $shop->payable == 1) checked @endif />可
+                @if ($shop && $shop->payable == 1) checked @elseif (empty($shop)) checked @endif />可
             </label>
             <label for="non-payable" class="flex items-center justify-center gap-x-2 text-sm">
               <input type="radio" name="payable" id="non-payable" value="0" class="w-3 h-3"
