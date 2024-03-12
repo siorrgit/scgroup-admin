@@ -50,6 +50,8 @@ class ShopController extends Controller
             'name' => $request->name,
             'postcode' => $request->postcode,
             'address' => $request->address,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
             'tel' => $request->tel,
             'hours' => $request->hours,
             'holiday' => $request->holiday,
