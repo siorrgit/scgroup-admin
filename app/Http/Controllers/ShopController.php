@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 // use App\Http\Resources\OrderResource;
+use App\Models\Area;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 
@@ -20,15 +21,21 @@ class ShopController extends Controller
     public function edit(string $id)
     {
         $shop = Shop::find($id);
+        $areas = Area::all();
 
         return view('shop/detail', [
-            'shop' => $shop
+            'shop' => $shop,
+            'areas' => $areas,
         ]);
     }
 
     public function create()
     {
-        return view('shop/detail');
+        $areas = Area::all();
+
+        return view('shop/detail', [
+            'areas' => $areas
+        ]);
     }
 
     public function store(Request $request)
