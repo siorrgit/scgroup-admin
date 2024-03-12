@@ -21,16 +21,16 @@ class ShopController extends Controller
 
     public function edit(string $id)
     {
-        $shop = Shop::find($id);
         $areas = Area::all();
+        $shop = Shop::find($id);
 
         return view('shop/detail', [
-            'shop' => $shop,
             'areas' => $areas,
+            'shop' => $shop,
         ]);
     }
 
-    public function create(): View
+    public function create()
     {
         $areas = Area::all();
 
@@ -39,15 +39,17 @@ class ShopController extends Controller
         ]);
     }
 
-    public function store(Request $request): View
+    public function store(Request $request)
     {
+        $areas = Area::all();
+
         $request->validate([
             'id' => 'required|alpha_num:ascii|unique:shops|max:32',
         ]);
 
         $shop = Shop::create([
             'id' => $request->id,
-            'area_id' => $request->area_id,
+            'area_id' => (int) $request->area_id,
             'name' => $request->name,
             'postcode' => $request->postcode,
             'address' => $request->address,
@@ -63,8 +65,8 @@ class ShopController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return view('shop/detail', [
-            'shop' => $shop
-        ]);
+        return redirect('/shop/' . $shop->id);
     }
+
+    // update パスワードはrequestにあった場合のみ更新する
 }

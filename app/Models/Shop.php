@@ -19,6 +19,7 @@ class Shop extends Authenticatable
      */
     protected $fillable = [
         'id',
+        'area_id',
         'name',
         'postcode',
         'address',
