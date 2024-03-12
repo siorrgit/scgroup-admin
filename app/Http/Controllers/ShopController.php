@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ShopController extends Controller
 {
