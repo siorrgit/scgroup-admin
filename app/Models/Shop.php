@@ -22,6 +22,8 @@ class Shop extends Authenticatable
         'name',
         'postcode',
         'address',
+        'lat',
+        'lng',
         'tel',
         'hours',
         'holiday',

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->char('postcode', 7);
             $table->string('address');
+            $table->string('lat');
+            $table->string('lng');
             $table->string('tel');
             $table->text('hours')->nullable();
             $table->text('holiday')->nullable();
