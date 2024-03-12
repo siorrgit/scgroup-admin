@@ -69,4 +69,33 @@ class ShopController extends Controller
     }
 
     // update パスワードはrequestにあった場合のみ更新する
+    public function update(Request $request, string $id)
+    {
+        $areas = Area::all();
+
+        // $request->validate([
+        //     'id' => 'required|alpha_num:ascii|unique:shops|max:32',
+        // ]);
+
+        $shop = Shop::find($id);
+        $shop->area_id = (int) $request->area_id;
+        $shop->name = $request->name;
+        $shop->postcode = $request->postcode;
+        $shop->address = $request->address;
+        $shop->lat = $request->lat;
+        $shop->lng = $request->lng;
+        $shop->tel = $request->tel;
+        $shop->hours = $request->hours;
+        $shop->holiday = $request->holiday;
+        $shop->note = $request->note;
+        $shop->payable = $request->payable;
+        if ($request->password) {
+            $shop->password = Hash::make($request->password);
+        }
+
+        return view('shop/detail', [
+            'areas' => $areas,
+            'shop' => $shop,
+        ]);
+    }
 }
