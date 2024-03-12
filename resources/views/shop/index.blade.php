@@ -21,7 +21,7 @@
                 @foreach ($shops as $shop)
                 <tr>
                     <td class="px-4 py-3 text-m"></td>
-                    <td class="px-4 py-3 text-m">{{ $shop->area_id }}</td>
+                    <td class="px-4 py-3 text-m">{{ $shop->area->name }}</td>
                     <td class="px-4 py-3 text-m">{{ $shop->id }}</td>
                     <td class="px-4 py-3 text-m text-gray-900">{{ $shop->name }}</td>
                     <td class="px-4 py-3"><a class="text-m text-blue-900" href={{'shop/' . $shop->id}}>詳細</a></td>

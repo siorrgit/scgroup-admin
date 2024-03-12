@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Area;
 
 class Shop extends Authenticatable
 {
@@ -57,4 +58,12 @@ class Shop extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * この電話を所有しているユーザーの取得
+     */
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }
