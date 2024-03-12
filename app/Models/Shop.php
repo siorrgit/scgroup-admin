@@ -60,7 +60,7 @@ class Shop extends Authenticatable
     ];
 
     /**
-     * この電話を所有しているユーザーの取得
+     *
      */
     public function area()
     {
