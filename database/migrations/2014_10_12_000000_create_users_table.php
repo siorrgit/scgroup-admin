@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->char('onetime_token', 4)->nullable();
+            $table->dateTime('onetime_token_expiration')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

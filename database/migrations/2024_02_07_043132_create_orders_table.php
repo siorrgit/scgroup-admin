@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('number');
-            // $table->foreignId('prescription_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('shop_id')->constrained();
+            $table->dateTime('receiving_at');
+            $table->dateTime('received_at');
+            $table->text('message');
             $table->timestamps();
 
             $table->softDeletes();
