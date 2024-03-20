@@ -36,18 +36,18 @@ Route::middleware('auth')->group(function () {
     Route::put('/shop/{id}', [ShopController::class, 'update']);
 
     // 処方せん（未完了）
-    Route::get('/incomplete', [PrescriptionController::class, 'index']);
-    Route::get('/incomplete/{id}', [PrescriptionController::class, 'edit']);
-    Route::put('/incomplete/{id}', [PrescriptionController::class, 'update']);
+    // Route::get('/incomplete', [RecipeController::class, 'index']);
+    // Route::get('/incomplete/{id}', [RecipeController::class, 'edit']);
+    // Route::put('/incomplete/{id}', [RecipeController::class, 'update']);
 
     // 処方せん（完了）
-    Route::get('/complete', [PrescriptionController::class, 'index']);
-    Route::get('/complete/{id}', [PrescriptionController::class, 'edit']);
-    Route::put('/complete/{id}', [PrescriptionController::class, 'update']);
+    // Route::get('/complete', [RecipeController::class, 'index']);
+    // Route::get('/complete/{id}', [RecipeController::class, 'edit']);
+    // Route::put('/complete/{id}', [RecipeController::class, 'update']);
 
     // ユーザー
-    Route::get('/user', [UserController::class, 'index']);
-    Route::get('/user/{id}', [UserController::class, 'edit']);
+    // Route::get('/user', [UserController::class, 'index']);
+    // Route::get('/user/{id}', [UserController::class, 'edit']);
 
     // 開発者用ページ
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

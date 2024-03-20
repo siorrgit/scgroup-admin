@@ -25,10 +25,10 @@ class Order extends Model
     ];
 
     /**
-     * Prescription relationship.
+     * Recipe relationship.
      */
-    public function prescriptions(): HasMany
+    public function recipes(): HasMany
     {
-        return $this->hasMany(Prescription::class);
+        return $this->hasMany(Recipe::class);
     }
 }
