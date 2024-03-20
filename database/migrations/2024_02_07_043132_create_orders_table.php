@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('number');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('shop_id')->constrained();
+            $table->string('shop_id')->references('id')->on('shops');
             $table->dateTime('receiving_at');
             $table->dateTime('received_at');
             $table->string('status');
