@@ -5,8 +5,8 @@
       </a>
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
         <a href="/shop" class="mr-5 font-bold hover:text-blue-600">店舗一覧</a>
-        <a class="mr-5 font-bold hover:text-blue-600">処方せん（未完了）一覧</a>
-        <a class="mr-5 font-bold hover:text-blue-600">処方せん（完了）一覧</a>
+        <a href="/incomplete" class="mr-5 font-bold hover:text-blue-600">処方せん（未完了）一覧</a>
+        <a href="/complete" class="mr-5 font-bold hover:text-blue-600">処方せん（完了）一覧</a>
         <a class="mr-5 font-bold hover:text-blue-600">ユーザー一覧</a>
       </nav>
       <form method="POST" action="{{ route('logout') }}">
