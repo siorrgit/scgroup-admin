@@ -17,13 +17,13 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('shop_id')->references('id')->on('shops');
             $table->dateTime('receiving_at');
-            $table->dateTime('received_at');
+            $table->dateTime('received_at')->nullable();
             $table->string('status');
             // 未完了 - incomplete
             // 事前登録決済済み - apppayed
             // 店頭決済済み - shoppayed
             // キャンセル - canceled
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->timestamps();
 
             $table->softDeletes();
