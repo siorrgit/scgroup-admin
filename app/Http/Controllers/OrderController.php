@@ -11,8 +11,17 @@ class OrderController extends Controller
     {
         $orders = Order::all();
 
-        return view('order', [
+        return view('order.index', [
             'orders' => $orders,
+        ]);
+    }
+
+    public function edit(string $id)
+    {
+        $order = Order::find($id);
+
+        return view('order.detail', [
+            'order' => $order,
         ]);
     }
 }
