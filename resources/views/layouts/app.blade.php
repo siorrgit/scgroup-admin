@@ -18,7 +18,7 @@
         <div class="min-h-screen">
             <x-header />
             <!-- Page Content -->
-            <main>
+            <main class="pb-20">
                 {{ $slot }}
             </main>
         </div>
