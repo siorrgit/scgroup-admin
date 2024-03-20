@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('received_at')->nullable();
             $table->string('status');
             // 未完了 - incomplete
+            // 未完了（来店依頼済み） - notified
             // 事前登録決済済み - apppayed
             // 店頭決済済み - shoppayed
             // キャンセル - canceled
