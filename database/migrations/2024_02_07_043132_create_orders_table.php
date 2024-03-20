@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('shop_id')->constrained();
             $table->dateTime('receiving_at');
             $table->dateTime('received_at');
+            $table->string('status');
             $table->text('message');
             $table->timestamps();
 
