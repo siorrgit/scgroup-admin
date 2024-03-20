@@ -19,6 +19,10 @@ return new class extends Migration
             $table->dateTime('receiving_at');
             $table->dateTime('received_at');
             $table->string('status');
+            // 未完了 - incomplete
+            // 事前登録決済済み - apppayed
+            // 店頭決済済み - shoppayed
+            // キャンセル - canceled
             $table->text('message');
             $table->timestamps();
 
