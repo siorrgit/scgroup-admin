@@ -19,9 +19,14 @@ class Order extends Model
     protected $fillable = [
         'number',
         'user_id',
+        'guest_first_name',
+        'guest_last_name',
+        'guest_email',
+        'guest_phone',
         'shop_id',
         'receiving_at',
         'received_at',
+        'status',
         'message',
     ];
 
