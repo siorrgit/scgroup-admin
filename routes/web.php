@@ -36,12 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/shop/{id}', [ShopController::class, 'update']);
 
     // 処方せん（未完了）
-    Route::get('/incomplete', [OrderController::class, 'index']);
+    Route::get('/incomplete', [OrderController::class, 'incompletes']);
     Route::get('/incomplete/{id}', [OrderController::class, 'edit']);
     // Route::put('/incomplete/{id}', [RecipeController::class, 'update']);
 
     // 処方せん（完了）
-    Route::get('/complete', [OrderController::class, 'index']);
+    Route::get('/complete', [OrderController::class, 'completes']);
     Route::get('/complete/{id}', [OrderController::class, 'edit']);
     // Route::put('/complete/{id}', [RecipeController::class, 'update']);
 

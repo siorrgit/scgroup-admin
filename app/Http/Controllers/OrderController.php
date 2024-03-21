@@ -7,9 +7,22 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function incompletes()
     {
-        $orders = Order::all();
+        $orders = Order::query()
+                       ->whereIn('status', ['incomplete', 'notified'])
+                       ->get();
+
+        return view('order.index', [
+            'orders' => $orders,
+        ]);
+    }
+
+    public function completes()
+    {
+        $orders = Order::query()
+                       ->whereIn('status', ['apppayed', 'shoppayed', 'canceled'])
+                       ->get();
 
         return view('order.index', [
             'orders' => $orders,
