@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('number');
-            $table->foreignId('user_id')->constrained()->nullable();
-            $table->string('guest_first_name');
-            $table->string('guest_last_name');
-            $table->string('guest_email');
-            $table->string('guest_phone');
+            $table->unsignedBigInteger('user_id')->references('id')->on('users')->nullable();
+            $table->string('guest_first_name')->nullable();
+            $table->string('guest_last_name')->nullable();
+            $table->string('guest_email')->nullable();
+            $table->string('guest_phone')->nullable();
             $table->string('shop_id')->references('id')->on('shops');
             $table->dateTime('receiving_at');
             $table->dateTime('received_at')->nullable();
