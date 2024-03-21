@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class ShopsSeeder extends Seeder
 {
@@ -35,7 +36,7 @@ class ShopsSeeder extends Seeder
                 'payable' => 1,
                 'email' => 'M01@shohousen.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$12$v.KVU6dd1uAF1qyK/sSz2OhvFsxSSC1ULaNi4X78lxB4hdW72Emca',
+                'password' => Hash::make('otbhKb7HmHrL'),
                 'remember_token' => NULL,
                 'created_at' => '2024-03-14 00:22:54',
                 'updated_at' => '2024-03-14 00:22:54',
@@ -57,7 +58,7 @@ class ShopsSeeder extends Seeder
                 'payable' => 1,
                 'email' => 'S01@shohousen.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$12$szRpiH92C/0F/drcmO8ZRudeFSOujHoi/2/UPmKYb6jgTgJGzWP6u',
+                'password' => Hash::make('otbhKb7HmHrL'),
                 'remember_token' => NULL,
                 'created_at' => '2024-03-14 00:15:27',
                 'updated_at' => '2024-03-14 00:15:27',
@@ -78,7 +79,7 @@ class ShopsSeeder extends Seeder
                 'payable' => 1,
                 'email' => 'S02@shohousen.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$12$KajFy2TKRuaABtuR19WTEeFLMN8JYAxPjCjDknU8.7g1OoaN.Lria',
+                'password' => Hash::make('otbhKb7HmHrL'),
                 'remember_token' => NULL,
                 'created_at' => '2024-03-14 00:19:34',
                 'updated_at' => '2024-03-14 00:19:34',
@@ -100,7 +101,7 @@ class ShopsSeeder extends Seeder
                 'payable' => 1,
                 'email' => 'T01@shohousen.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$12$wmhIcCliwGErj0nFBk.7oOoGvCs2SrDewhF6.1r6SLDIQVtjp0.ky',
+                'password' => Hash::make('otbhKb7HmHrL'),
                 'remember_token' => NULL,
                 'created_at' => '2024-03-14 00:17:48',
                 'updated_at' => '2024-03-14 00:17:48',
@@ -121,7 +122,7 @@ class ShopsSeeder extends Seeder
                 'payable' => 1,
                 'email' => 'T02@shohousen.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$12$i0hCo8AmSVb7rhgi88UFZuD/0rtJJ2HkK1atykvEP.EgooMDI2Oh6',
+                'password' => Hash::make('otbhKb7HmHrL'),
                 'remember_token' => NULL,
                 'created_at' => '2024-03-14 02:28:04',
                 'updated_at' => '2024-03-14 02:28:04',
