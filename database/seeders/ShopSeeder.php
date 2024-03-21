@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class ShopsSeeder extends Seeder
+class ShopSeeder extends Seeder
 {
 
     /**
