@@ -52,50 +52,49 @@
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t mt-10">
         <div class="w-2/6 text-base">名前</div>
         <div class="w-4/6 text-base">
-          {{-- {{ $order->user->last_name }}　{{ $order->user->first_name }} --}}
-          山田　太朗
+          {{ $order->user ? $order->user->last_name : $order->guest_last_name }}
+          {{ $order->user ? $order->user->first_name : $order->guest_first_name }}
         </div>
       </div>
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
         <div class="w-2/6 text-base">名前（フリガナ）</div>
         <div class="w-4/6 text-base">
-          {{-- {{ $order->user->last_kana }}　{{ $order->user->first_kana }} --}}
-          ヤマダ　タロウ
+          {{ $order->user ? $order->user->last_kana : $order->guest_last_kana }}
+          {{ $order->user ? $order->user->first_kana : $order->guest_first_kana }}
         </div>
       </div>
+      @if ($order->user)
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
         <div class="w-2/6 text-base">性別</div>
         <div class="w-4/6 text-base">
-          {{-- {{ $order->user->gender == 'man' ? '男性' : '女性' }} --}}
-          男性
+          {{ $order->user->gender == 'man' ? '男性' : '女性' }}
         </div>
       </div>
+      @endif
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
         <div class="w-2/6 text-base">メールアドレス</div>
         <div class="w-4/6 text-base">
-          {{-- {{ $order->user->email }} --}}
-          test@test.com
+          {{ $order->user ? $order->user->email : $order->guest_email }}
         </div>
       </div>
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
         <div class="w-2/6 text-base">携帯番号</div>
         <div class="w-4/6 text-base">
-          {{-- {{ $order->user->phone }} --}}
-          090-1234-5678
+          {{ $order->user ? $order->user->phone : $order->guest_phone }}
         </div>
       </div>
+      @if ($order->user)
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
         <div class="w-2/6 text-base">Push通知</div>
         <div class="w-4/6 text-base">
-          {{-- {{ $order->user->notification == '1' ? '許可する' : '許可しない' }} --}}
-          許可する
+          {{ $order->user->notification == '1' ? '許可する' : '許可しない' }}
         </div>
       </div>
+      @endif
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
         <div class="w-2/6 text-base">お受け取り希望日</div>
         <div class="w-4/6 text-base">
           {{ \Carbon\Carbon::createFromTimeString($order->receiving_at)->format('Y/m/d') }}
-          {{-- {{ $order->receiving_at->format('Y/m/d') }} --}}
         </div>
       </div>
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
