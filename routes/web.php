@@ -3,6 +3,7 @@
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,8 +47,9 @@ Route::middleware('auth')->group(function () {
     // Route::put('/complete/{id}', [RecipeController::class, 'update']);
 
     // ユーザー
-    // Route::get('/user', [UserController::class, 'index']);
-    // Route::get('/user/{id}', [UserController::class, 'edit']);
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/user/{id}', [UserController::class, 'edit']);
+    // Route::put('/user/{id}', [UserController::class, 'update']);
 
     // 開発者用ページ
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
