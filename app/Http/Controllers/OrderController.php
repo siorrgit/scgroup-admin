@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,9 +13,11 @@ class OrderController extends Controller
         $orders = Order::query()
                        ->whereIn('status', ['incomplete', 'notified'])
                        ->get();
+        $shops = Shop::all();
 
         return view('order.index', [
             'orders' => $orders,
+            'shops' => $shops,
         ]);
     }
 
@@ -23,9 +26,11 @@ class OrderController extends Controller
         $orders = Order::query()
                        ->whereIn('status', ['apppayed', 'shoppayed', 'canceled'])
                        ->get();
+        $shops = Shop::all();
 
         return view('order.index', [
             'orders' => $orders,
+            'shops' => $shops,
         ]);
     }
 
