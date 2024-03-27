@@ -55,7 +55,25 @@ class OrderSeeder extends Seeder
                 'updated_at' => '2024-03-20 05:46:38',
                 'deleted_at' => NULL,
             ),
-        ));
+            2 =>
+            array (
+                'id' => 3,
+                'number' => 'T01-240321-003',
+                'user_id' => 1,
+                'guest_first_name' => '',
+                'guest_last_name' => '',
+                'guest_email' => '',
+                'guest_phone' => '',
+                'shop_id' => 'T01',
+                'receiving_at' => '2024-03-20 05:46:38',
+                'received_at' => '2024-03-20 05:46:38',
+                'status' => 'incomplete',
+                'message' => 'ジェネリックでお願いします。',
+                'created_at' => '2024-03-20 05:46:38',
+                'updated_at' => '2024-03-20 05:46:38',
+                'deleted_at' => NULL,
+            ),
+         ));
 
 
     }
