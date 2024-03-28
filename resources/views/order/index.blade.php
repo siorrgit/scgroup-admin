@@ -47,18 +47,18 @@
                 <thead>
                   <tr class="bg-gray-100">
                     @if ($pagemode == 'incomplete')
-                    <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
-                    <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
+                      <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
+                      <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
                     @endif
                     <th class="px-4 py-3 tracking-wider text-base font-bold">受付番号</th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold">姓</th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold">名</th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold">
-                        @if ($pagemode == 'incomplete')
+                      @if ($pagemode == 'incomplete')
                         受取希望日
-                        @else
+                      @else
                         受渡日
-                        @endif
+                      @endif
                     </th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
                   </tr>
@@ -68,12 +68,15 @@
                     <tr>
                       @if ($pagemode == 'incomplete')
                         <td class="px-4 py-3 text-base">
-                          <a href=""><img class="w-6" src="/assets/img/global/icons/mail.svg"
-                              alt="" /></a>
+                          @if (!empty($order->user))
+                            <a href="{{ '/user/' . $order->user->id . '#chat' }}"><img class="w-6"
+                                src="/assets/img/global/icons/chat.svg" alt="" /></a>
+                          @endif
                         </td>
                         <td class="px-4 py-3 text-base">
-                          <a href=""><img class="w-6" src="/assets/img/global/icons/paper-airplane.svg"
-                              alt="" /></a>
+                          @if (!empty($order->user))
+                            <img class="w-6" src="/assets/img/global/icons/paper-airplane.svg" alt="" />
+                          @endif
                         </td>
                       @endif
                       <td class="px-4 py-3 text-base">{{ $order->number }}</td>
@@ -85,11 +88,11 @@
                       </td>
                       <td class="px-4 py-3 text-base">
                         @if ($pagemode == 'incomplete')
-                        {{ $order->receiving_at ? \Carbon\Carbon::createFromTimeString($order->receiving_at)->format('Y/m/d') : '' }}
+                          {{ $order->receiving_at ? \Carbon\Carbon::createFromTimeString($order->receiving_at)->format('Y/m/d') : '' }}
                         @elseif ($order->status == 'canceled')
-                        キャンセル
+                          キャンセル
                         @else
-                        {{ $order->received_at ? \Carbon\Carbon::createFromTimeString($order->received_at)->format('Y/m/d') : '' }}
+                          {{ $order->received_at ? \Carbon\Carbon::createFromTimeString($order->received_at)->format('Y/m/d') : '' }}
                         @endif
                       </td>
                       <td class="px-4 py-3"><a class="text-base text-blue-900" href={{ $url . '/' . $order->id }}>詳細</a>
