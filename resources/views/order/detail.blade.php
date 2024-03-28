@@ -31,19 +31,19 @@
       <div class=" text-lg text-center font-bold mt-14 mb-10">
         {{ $order->status == 'incomplete'
             ? '未完了'
-            : ($order->status == 'apppayed'
-                ? '事前登録決済済み'
-                : ($order->status == 'shoppayed'
-                    ? '店頭決済済み'
-                    : 'キャンセル')) }}
-        <br />
-        (来店依頼済み)
+            : ($order->status === 'notified'
+                ? '未完了（来店依頼済み）'
+                : ($order->status == 'apppayed'
+                    ? '事前登録決済済み'
+                    : ($order->status == 'shoppayed'
+                        ? '店頭決済済み'
+                        : 'キャンセル'))) }}
       </div>
 
       @if (!empty($order->user))
         <div class="flex items-center justify-end w-full mb-2">
-          <a href="{{ '/user/' . $order->user->id . '#chat' }}"><img class="w-8 h-8" src="/assets/img/global/icons/mail.svg"
-              alt="" /></a>
+          <a href="{{ '/user/' . $order->user->id . '#chat' }}"><img class="w-8 h-8"
+              src="/assets/img/global/icons/mail.svg" alt="" /></a>
         </div>
       @else
         <div class="flex items-center gap-x-5 w-full mb-2">
@@ -70,6 +70,12 @@
           <div class="w-2/6 text-base">性別</div>
           <div class="w-4/6 text-base">
             {{ $order->user->gender == 'man' ? '男性' : '女性' }}
+          </div>
+        </div>
+        <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
+          <div class="w-2/6 text-base">生年月日</div>
+          <div class="w-4/6 text-base">
+            {{ $order->user->birth_year . '年 ' . $order->user->birth_month . '月 ' . $order->user->birth_day . '日' }}
           </div>
         </div>
       @endif
@@ -138,26 +144,51 @@
         <i class="block w-[20px] h-[1px] bg-white absolute top-0 right-0 bottom-0 left-0 m-auto -rotate-45"></i>
       </button>
       <div id="modal-body">
+        @if(!empty($order->user))
         <div id="modal-request" class="modal-i hidden p-10">
-          <form method="" action="">
-            @csrf
-            <div class="text-2xl font-bold text-center">来店依頼</div>
-            <div class="text-center mt-5">来店依頼をユーザーへ送信します。<br />本当によろしいですか？</div>
-            <div class="flex justify-center w-full mt-20">
+          <div class="text-2xl font-bold text-center">来店依頼</div>
+          <div class="text-center mt-5">
+            {{ $order->user->last_name . ' ' . $order->user->first_name }}さんへ以下の内容で来店依頼通知を送ります<br />送信しますか？<br />
+            <div class="block rounded-md bg-gray-100 p-5 text-base mt-3">お薬のお渡し準備が完了いたしました。<br />ご来店お待ちしております。</div>
+          </div>
+          <div class="flex justify-center w-full mt-20">
+            <form method="" action="">
+              @csrf
               <x-primary-button class="text-m min-w-[100px]">送信</x-primary-button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
         <div id="modal-apppay" class="modal-i hidden p-10">
-          <form method="" action="">
-            @csrf
-            <div class="text-2xl font-bold text-center">事前登録決済実行</div>
-            <div class="text-center mt-5">事前登録された決済方法にて決済を実行します。<br />本当によろしいですか？</div>
-            <div class="flex justify-center w-full mt-20">
-              <x-primary-button class="text-m min-w-[100px]">送信</x-primary-button>
-            </div>
-          </form>
+          <div class="text-2xl font-bold text-center">事前登録決済実行</div>
+          <div class="text-center mt-5">
+            {{ $order->user->last_name . ' ' . $order->user->first_name }}さんへの請求金額を入力してください。
+          </div>
+          <div class="flex justify-center flex-wrap w-full mt-10">
+            <form id="apppayForm" method="" action="" class="flex flex-col justify-center">
+              @csrf
+              <div class="flex justify-center items-center gap-x-3 w-full">
+                <x-forms.text-input id="priceInput" name="price" pattern="^[0-9]+$" class="w-[200px]" required />
+                <span class="text-base font-bold">円</span>
+              </div>
+              <x-primary-button class="text-m min-w-[100px] mt-10">確認</x-primary-button>
+            </form>
+          </div>
         </div>
+        <div id="modal-apppay-confirm" class="modal-i hidden p-10">
+            <div class="text-2xl font-bold text-center">事前登録決済実行</div>
+            <div class="text-center mt-5 text-lg font-bold">
+                {{ $order->user->last_name . ' ' . $order->user->first_name }}さんへ
+                <br />
+                {{ \Carbon\Carbon::now()->format('m月d日') }}付けで
+                <br />
+                <span id="priceSpan"></span>円の決済を実行します。
+            </div>
+            <div class="flex justify-center flex-wrap w-full mt-10">
+                <x-primary-button type="button" class="text-m min-w-[100px] mt-10"
+                onclick="apppay()">決済実行</x-primary-button>
+            </div>
+        </div>
+        @endif
         <div id="modal-shoppay" class="modal-i hidden p-10">
           <form method="" action="">
             @csrf
@@ -200,6 +231,10 @@
   const modalCloseBtn = document.getElementById('modal-close')
 
   const modalOpen = (type) => {
+    closeModal()
+    if (type === 'apppay') {
+      apppayClear()
+    }
     const targetModal = document.getElementById(`modal-${type}`)
 
     targetModal.classList.remove('hidden')
@@ -216,8 +251,27 @@
     });
     modal.classList.remove('flex')
     modal.classList.add('hidden')
-
   }
   modalOverlay.addEventListener('click', closeModal)
   modalCloseBtn.addEventListener('click', closeModal)
+
+  // 事前決済
+  const apppayForm = document.getElementById('apppayForm')
+  const priceInput = document.getElementById('priceInput')
+  const priceSpan = document.getElementById('priceSpan')
+
+  apppayForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    priceSpan.innerHTML = priceInput.value
+    modalOpen('apppay-confirm')
+  })
+
+  const apppay = () => {
+    apppayForm.submit()
+  }
+
+  const apppayClear = () => {
+    priceInput.value = ''
+    priceSpan.innerHTML = ''
+  }
 </script>
