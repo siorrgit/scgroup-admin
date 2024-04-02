@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     // ユーザー
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/{id}', [UserController::class, 'edit']);
-    // Route::put('/user/{id}', [UserController::class, 'update']);
+    Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
     // 開発者用ページ
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

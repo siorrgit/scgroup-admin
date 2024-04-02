@@ -76,8 +76,9 @@
       </button>
       <div id="modal-body">
         <div id="modal-delete" class="modal-i hidden p-10">
-          <form method="" action="">
+          <form method="post" action="{{ url('/user/' . $user->id) }}">
             @csrf
+            @method('DELETE')
             <div class="text-2xl font-bold text-center">ユーザー無効化</div>
             <div class="text-center mt-5">このユーザーを無効化します。<br />本当によろしいですか？</div>
             <div class="flex justify-center w-full mt-20">
