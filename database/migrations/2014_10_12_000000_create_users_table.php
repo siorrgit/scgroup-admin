@@ -32,6 +32,8 @@ return new class extends Migration
             $table->dateTime('onetime_token_expiration')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

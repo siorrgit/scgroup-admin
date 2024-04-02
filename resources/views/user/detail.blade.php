@@ -97,8 +97,9 @@
           </form>
         </div>
         <div id="modal-activate" class="modal-i hidden p-10">
-          <form method="" action="">
+          <form method="post" action="{{ url('/user/activate/' . $user->id) }}">
             @csrf
+            @method('PUT')
             <div class="text-2xl font-bold text-center">ユーザー有効化</div>
             <div class="text-center mt-5">このユーザーを有効化します。<br />本当によろしいですか？</div>
             <div class="flex justify-center w-full mt-20">

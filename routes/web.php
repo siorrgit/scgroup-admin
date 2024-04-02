@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/{id}', [UserController::class, 'edit']);
     Route::delete('/user/{id}', [UserController::class, 'destroy']);
+    Route::put('/user/activate/{id}', [UserController::class, 'activate']);
 
     // 開発者用ページ
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

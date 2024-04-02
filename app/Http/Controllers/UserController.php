@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::withTrashed()->whereNotNull('id')->get();
         $shops = Shop::all();
 
         return view('user.index', [
@@ -21,10 +21,25 @@ class UserController extends Controller
 
     public function edit(Request $request, int $id)
     {
-        $user = User::find($id);
+        $user = User::withTrashed()->where('id', $id)->first();
 
         return view('user.detail', [
             'user' => $user,
         ]);
+    }
+
+    public function destroy(int $id)
+    {
+        $user = User::find($id)->delete();
+
+        return redirect("/user/{$id}")->with(['status' => 'user-deleted']);
+    }
+
+    public function activate(int $id)
+    {
+        $user = User::withTrashed()->where('id', $id)->first();
+        $user->restore();
+
+        return redirect("/user/{$id}")->with(['status' => 'user-activated']);
     }
 }
