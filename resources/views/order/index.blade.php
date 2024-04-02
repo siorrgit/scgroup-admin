@@ -47,8 +47,8 @@
                 <thead>
                   <tr class="bg-gray-100">
                     @if ($pagemode == 'incomplete')
-                      <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
-                      <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
+                      <th class="px-4 py-3 tracking-wider text-base font-bold">新着</th>
+                      <th class="px-4 py-3 tracking-wider text-base font-bold">来店依頼済</th>
                     @endif
                     <th class="px-4 py-3 tracking-wider text-base font-bold">受付番号</th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold">姓</th>
@@ -61,6 +61,7 @@
                       @endif
                     </th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
+                    <th class="px-4 py-3 tracking-wider text-base font-bold"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -69,12 +70,11 @@
                       @if ($pagemode == 'incomplete')
                         <td class="px-4 py-3 text-base">
                           @if (!empty($order->user))
-                            <a href="{{ '/user/' . $order->user->id . '#chat' }}"><img class="w-6"
-                                src="/assets/img/global/icons/chat.svg" alt="" /></a>
+                            <img class="w-6" src="/assets/img/global/icons/chat.svg" alt="" />
                           @endif
                         </td>
                         <td class="px-4 py-3 text-base">
-                          @if (!empty($order->user))
+                          @if (!empty($order->user) && $order->status == 'incomplete_notified')
                             <img class="w-6" src="/assets/img/global/icons/paper-airplane.svg" alt="" />
                           @endif
                         </td>
@@ -95,7 +95,13 @@
                           {{ $order->received_at ? \Carbon\Carbon::createFromTimeString($order->received_at)->format('Y/m/d') : '' }}
                         @endif
                       </td>
-                      <td class="px-4 py-3"><a class="text-base text-blue-900" href={{ $url . '/' . $order->id }}>詳細</a>
+                      <td class="px-4 py-3"><a class="text-base text-blue-900"
+                          href={{ $url . '/' . $order->id }}>処方せん詳細</a></td>
+                      <td class="px-4 py-3">
+                        @if (!empty($order->user))
+                          <a class="text-base text-blue-900"
+                            href={{ '/user/' . $order->user->id . '#chat' }}>チャット</a>
+                        @endif
                       </td>
                     </tr>
                   @endforeach

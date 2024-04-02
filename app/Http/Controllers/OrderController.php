@@ -11,7 +11,7 @@ class OrderController extends Controller
     public function incompletes()
     {
         $orders = Order::query()
-                       ->whereIn('status', ['incomplete', 'notified'])
+                       ->whereIn('status', ['incomplete_sent', 'incomplete_notified'])
                        ->get();
         $shops = Shop::all();
 
@@ -24,7 +24,7 @@ class OrderController extends Controller
     public function completes()
     {
         $orders = Order::query()
-                       ->whereIn('status', ['apppayed', 'shoppayed', 'canceled'])
+                       ->whereIn('status', ['complete_apppayed', 'complete_shoppayed', 'complete_canceled'])
                        ->get();
         $shops = Shop::all();
 
