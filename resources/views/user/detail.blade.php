@@ -4,8 +4,18 @@
       <h1 class="text-center w-full text-2xl font-bold title-font text-gray-900">
         {{ $user->last_name . ' ' . $user->first_name }} さんの詳細情報</h1>
 
+    @if(session('status') == 'user-deleted')
+        <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)" class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">{{ __('ユーザーを無効化しました。') }}</div>
+    @elseif (session('status') == 'user-activated')
+      <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)" class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">{{ __('ユーザーを有効化しました。') }}</div>
+    @endif
+
       <div class="flex justify-end mt-10">
-        <x-danger-button class="text-m" type="button" onclick="modalOpen('delete')">無効化</x-danger-button>
+        @if (empty($user->deleted_at))
+            <x-danger-button class="text-m" type="button" onclick="modalOpen('delete')">無効化</x-danger-button>
+        @else
+            <x-primary-button class="text-m" type="button" onclick="modalOpen('activate')">有効化</x-primary-button>
+        @endif
       </div>
 
       <div class="max-w-[600px] mx-auto mt-10">
@@ -83,6 +93,16 @@
             <div class="text-center mt-5">このユーザーを無効化します。<br />本当によろしいですか？</div>
             <div class="flex justify-center w-full mt-20">
               <x-danger-button class="text-m min-w-[100px] justify-center">送信</x-danger-button>
+            </div>
+          </form>
+        </div>
+        <div id="modal-activate" class="modal-i hidden p-10">
+          <form method="" action="">
+            @csrf
+            <div class="text-2xl font-bold text-center">ユーザー有効化</div>
+            <div class="text-center mt-5">このユーザーを有効化します。<br />本当によろしいですか？</div>
+            <div class="flex justify-center w-full mt-20">
+              <x-primary-button class="text-m min-w-[100px] justify-center">送信</x-primary-button>
             </div>
           </form>
         </div>
