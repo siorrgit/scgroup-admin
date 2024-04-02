@@ -49,6 +49,42 @@ class OrderController extends Controller
         $order->status = 'incomplete_notified';
         $order->save();
 
-        return redirect("/incomplete/{$id}")->with(['status' => 'order-notified']);
+        return redirect("/order/{$id}")->with(['status' => 'order-notified']);
+    }
+
+    public function apppay(string $id)
+    {
+        $order = Order::find($id);
+        $order->status = 'complete_apppayed';
+        $order->save();
+
+        return redirect("/order/{$id}")->with(['status' => 'order-apppayed']);
+    }
+
+    public function shoppay(string $id)
+    {
+        $order = Order::find($id);
+        $order->status = 'complete_shoppayed';
+        $order->save();
+
+        return redirect("/order/{$id}")->with(['status' => 'order-shoppayed']);
+    }
+
+    public function cancel(string $id)
+    {
+        $order = Order::find($id);
+        $order->status = 'complete_canceled';
+        $order->save();
+
+        return redirect("/order/{$id}")->with(['status' => 'order-canceled']);
+    }
+
+    public function incomplete(string $id)
+    {
+        $order = Order::find($id);
+        $order->status = 'incomplete_sent';
+        $order->save();
+
+        return redirect("/order/{$id}")->with(['status' => 'order-incompleted']);
     }
 }

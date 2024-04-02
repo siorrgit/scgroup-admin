@@ -41,6 +41,10 @@ Route::middleware('auth')->group(function () {
 
     // 処方せん（ステータス更新）
     Route::put('/order/notify/{id}', [OrderController::class, 'notify']);
+    Route::put('/order/apppay/{id}', [OrderController::class, 'apppay']);
+    Route::put('/order/shoppay/{id}', [OrderController::class, 'shoppay']);
+    Route::put('/order/cancel/{id}', [OrderController::class, 'cancel']);
+    Route::put('/order/incomplete/{id}', [OrderController::class, 'incomplete']);
 
     // ユーザー
     Route::get('/user', [UserController::class, 'index']);

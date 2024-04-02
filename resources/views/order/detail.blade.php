@@ -165,8 +165,9 @@
             {{ $order->user->last_name . ' ' . $order->user->first_name }}さんへの請求金額を入力してください。
           </div>
           <div class="flex justify-center flex-wrap w-full mt-10">
-            <form id="apppayForm" method="" action="" class="flex flex-col justify-center">
+            <form id="apppayForm" method="post" action="{{ url('/order/apppay/' . $order->id) }}" class="flex flex-col justify-center">
               @csrf
+              @method('put')
               <div class="flex justify-center items-center gap-x-3 w-full">
                 <x-forms.text-input id="priceInput" name="price" pattern="^[0-9]+$" class="w-[200px]" required />
                 <span class="text-base font-bold">円</span>
@@ -191,8 +192,9 @@
         </div>
         @endif
         <div id="modal-shoppay" class="modal-i hidden p-10">
-          <form method="" action="">
+          <form method="post" action="{{ url('/order/shoppay/' . $order->id) }}">
             @csrf
+            @method('put')
             <div class="text-2xl font-bold text-center">店頭決済</div>
             <div class="text-center mt-5">店頭決済完了として送信します。<br />本当によろしいですか？</div>
             <div class="flex justify-center w-full mt-20">
@@ -201,8 +203,9 @@
           </form>
         </div>
         <div id="modal-cancel" class="modal-i hidden p-10">
-          <form method="" action="">
+          <form method="post" action="{{ url('/order/cancel/' . $order->id) }}">
             @csrf
+            @method('put')
             <div class="text-2xl font-bold text-center">キャンセル</div>
             <div class="text-center mt-5">この処方せん依頼をキャンセルとして完了させます。<br />本当によろしいですか？</div>
             <div class="flex justify-center w-full mt-20">
@@ -211,8 +214,9 @@
           </form>
         </div>
         <div id="modal-prevstatus" class="modal-i hidden p-10">
-          <form method="" action="">
+          <form method="post" action="{{ url('/order/incomplete/' . $order->id) }}">
             @csrf
+            @method('put')
             <div class="text-2xl font-bold text-center">未完了へ戻す</div>
             <div class="text-center mt-5">この処方せん依頼を未完了へ変更します。<br />本当によろしいですか？</div>
             <div class="flex justify-center w-full mt-20">
