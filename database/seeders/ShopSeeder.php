@@ -24,7 +24,7 @@ class ShopSeeder extends Seeder
             array (
                 'id' => 'M01',
                 'area_id' => 5,
-                'name' => 'あすと長町クローバ薬局',
+                'name' => '【テスト】あすと長町クローバ薬局',
                 'postcode' => '9820007',
                 'address' => '宮城県仙台市太白区あすと長町3丁目 3-26',
                 'lat' => '38.21827376445645',
@@ -45,7 +45,7 @@ class ShopSeeder extends Seeder
             array (
                 'id' => 'S01',
                 'area_id' => 2,
-                'name' => '青葉調剤薬局',
+                'name' => '【テスト】青葉調剤薬局',
                 'postcode' => '1890002',
                 'address' => '東村山市青葉町2-1-17',
                 'lat' => '35.76021832663593',
@@ -67,7 +67,7 @@ class ShopSeeder extends Seeder
             array (
                 'id' => 'S02',
                 'area_id' => 2,
-                'name' => '上尾クローバ薬局',
+                'name' => '【テスト】上尾クローバ薬局',
                 'postcode' => '3620003',
                 'address' => '上尾市菅谷265-1',
                 'lat' => '35.99647128170688',
@@ -88,7 +88,7 @@ class ShopSeeder extends Seeder
             array (
                 'id' => 'T01',
                 'area_id' => 1,
-                'name' => '赤羽調剤薬局',
+                'name' => '【テスト】赤羽調剤薬局',
                 'postcode' => '1150045',
                 'address' => '北区赤羽2-4-14蛇の目赤羽ビル1階',
                 'lat' => '35.77926617265497',
@@ -110,7 +110,7 @@ class ShopSeeder extends Seeder
             array (
                 'id' => 'T02',
                 'area_id' => 1,
-                'name' => '赤羽調剤薬局LaLa店',
+                'name' => '【テスト】赤羽調剤薬局LaLa店',
                 'postcode' => '1150045',
                 'address' => '北区赤羽2-4-10金剛第二ビル1階',
                 'lat' => '35.77930762662659',
