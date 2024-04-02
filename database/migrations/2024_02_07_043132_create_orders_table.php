@@ -23,12 +23,12 @@ return new class extends Migration
             $table->dateTime('receiving_at')->nullable();
             $table->dateTime('received_at')->nullable();
             $table->string('status');
-            // 登録中 - register
-            // 未完了 - incomplete
-            // 未完了（来店依頼済み） - notified
-            // 事前登録決済済み - apppayed
-            // 店頭決済済み - shoppayed
-            // キャンセル - canceled
+            // 下書き - draft
+            // 未完了（送信済み） - incomplete_sent
+            // 未完了（来店依頼済み） - incomplete_notified
+            // 完了（事前登録決済済み） - complete_apppayed
+            // 完了（店頭決済済み） - complete_shoppayed
+            // 完了（キャンセル） - complete_canceled
             $table->text('message')->nullable();
             $table->timestamps();
 
