@@ -96,7 +96,7 @@
                         @endif
                       </td>
                       <td class="px-4 py-3"><a class="text-base text-blue-900"
-                          href={{ $url . '/' . $order->id }}>処方せん詳細</a></td>
+                          href={{ '/order/' . $order->id }}>処方せん詳細</a></td>
                       <td class="px-4 py-3">
                         @if (!empty($order->user))
                           <a class="text-base text-blue-900"

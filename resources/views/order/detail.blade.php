@@ -1,8 +1,8 @@
 @php
   $pagemode = '';
-  if (Request::is('incomplete/*')) {
+  if ($order->status == 'incomplete_sent' || $order->status == 'incomplete_notified') {
       $pagemode = 'incomplete';
-  } elseif (Request::is('complete/*')) {
+  } elseif ($order->status == 'complete_apppayed' || $order->status == 'complete_shoppayed' || $order->status == 'complete_canceled') {
       $pagemode = 'complete';
   }
 @endphp
