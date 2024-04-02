@@ -47,6 +47,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $order->status = 'incomplete_notified';
+        $order->save();
 
         return redirect("/incomplete/{$id}")->with(['status' => 'order-notified']);
     }
