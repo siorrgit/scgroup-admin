@@ -29,13 +29,13 @@
     <div class="max-w-[600px] mx-auto mt-10">
 
       <div class=" text-lg text-center font-bold mt-14 mb-10">
-        {{ $order->status == 'incomplete'
+        {{ $order->status == 'incomplete_sent'
             ? '未完了'
-            : ($order->status === 'notified'
+            : ($order->status === 'incomplete_notified'
                 ? '未完了（来店依頼済み）'
-                : ($order->status == 'apppayed'
+                : ($order->status == 'complete_apppayed'
                     ? '事前登録決済済み'
-                    : ($order->status == 'shoppayed'
+                    : ($order->status == 'complete_shoppayed'
                         ? '店頭決済済み'
                         : 'キャンセル'))) }}
       </div>
