@@ -26,6 +26,28 @@
       </div>
     @endif
 
+    @if(session('status') == 'order-notified')
+    <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+      class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">
+      {{ __('来店依頼を送信しました') }}</div>
+      @elseif (session('status') == 'order-apppayed')
+      <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+        class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">
+        {{ __('事前登録決済が完了しました。') }}</div>
+      @elseif (session('status') == 'order-shoppayed')
+      <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+        class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">
+        {{ __('店頭決済が完了しました。') }}</div>
+      @elseif (session('status') == 'order-canceled')
+      <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+        class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">
+        {{ __('キャンセルに変更しました。') }}</div>
+      @elseif (session('status') == 'order-incompleted')
+      <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+        class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">
+        {{ __('未完了に変更しました。') }}</div>
+    @endif
+
     <div class="max-w-[600px] mx-auto mt-10">
 
       <div class=" text-lg text-center font-bold mt-14 mb-10">
