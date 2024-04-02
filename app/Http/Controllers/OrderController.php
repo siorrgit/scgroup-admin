@@ -42,4 +42,12 @@ class OrderController extends Controller
             'order' => $order,
         ]);
     }
+
+    public function notify(string $id)
+    {
+        $order = Order::find($id);
+        $order->status = 'incomplete_notified';
+
+        return redirect("/incomplete/{$id}")->with(['status' => 'order-notified']);
+    }
 }

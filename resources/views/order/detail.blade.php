@@ -152,8 +152,9 @@
             <div class="block rounded-md bg-gray-100 p-5 text-base mt-3">お薬のお渡し準備が完了いたしました。<br />ご来店お待ちしております。</div>
           </div>
           <div class="flex justify-center w-full mt-20">
-            <form method="" action="">
+            <form method="/order/notify/{{ $order->id }}" action="post">
               @csrf
+              @method('put')
               <x-primary-button class="text-m min-w-[100px]">送信</x-primary-button>
             </form>
           </div>

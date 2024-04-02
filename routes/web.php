@@ -33,12 +33,13 @@ Route::middleware('auth')->group(function () {
     // 処方せん（未完了）
     Route::get('/incomplete', [OrderController::class, 'incompletes']);
     Route::get('/incomplete/{id}', [OrderController::class, 'edit']);
-    // Route::put('/incomplete/{id}', [RecipeController::class, 'update']);
 
     // 処方せん（完了）
     Route::get('/complete', [OrderController::class, 'completes']);
     Route::get('/complete/{id}', [OrderController::class, 'edit']);
-    // Route::put('/complete/{id}', [RecipeController::class, 'update']);
+
+    // 処方せん（ステータス更新）
+    Route::put('/order/notify/{id}', [OrderController::class, 'notify']);
 
     // ユーザー
     Route::get('/user', [UserController::class, 'index']);
