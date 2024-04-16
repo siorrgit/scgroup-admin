@@ -68,14 +68,9 @@ class ShopController extends Controller
         return redirect('/shop/' . $shop->id);
     }
 
-    // update パスワードはrequestにあった場合のみ更新する
     public function update(Request $request, string $id)
     {
         $areas = Area::all();
-
-        // $request->validate([
-        //     'id' => 'required|alpha_num:ascii|unique:shops|max:32',
-        // ]);
 
         $shop = Shop::find($id);
         $shop->area_id = (int) $request->area_id;
@@ -92,10 +87,8 @@ class ShopController extends Controller
         if ($request->password) {
             $shop->password = Hash::make($request->password);
         }
+        $shop->save();
 
-        return view('shop/detail', [
-            'areas' => $areas,
-            'shop' => $shop,
-        ]);
+        return redirect('/shop/' . $shop->id);
     }
 }
