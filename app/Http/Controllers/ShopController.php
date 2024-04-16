@@ -70,8 +70,6 @@ class ShopController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $areas = Area::all();
-
         $shop = Shop::find($id);
         $shop->area_id = (int) $request->area_id;
         $shop->name = $request->name;
