@@ -28,6 +28,10 @@ class OrderController extends Controller
                        ->get();
         $shops = Shop::all();
 
+        // ToDo:
+        // 1週間分のデータを取得
+        // シーダーも直近1週間前後のデータを作成するように変更
+
         return view('order.index', [
             'orders' => $orders,
             'shops' => $shops,
