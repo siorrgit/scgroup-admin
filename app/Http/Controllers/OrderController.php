@@ -8,33 +8,55 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function incompletes()
+    public function incompletes(Request $request)
     {
         $orders = Order::query()
-                       ->whereIn('status', ['incomplete_sent', 'incomplete_notified'])
-                       ->get();
-        $shops = Shop::all();
+            ->whereIn('status', ['incomplete_sent', 'incomplete_notified']);
+
+        $text = $request->query('text');
+        if (!empty($text)) {
+            $orders = $orders->where('number', 'like', "%{$text}%");
+
+            // ToDo: Implement search by user name
+            //
+            // $orders = $orders->where(function ($query) use ($text) {
+            //     $query->where('number', 'like', "%{$text}%")
+            //         ->orWhere('user.last_name', 'like', "%{$text}%")
+            //         ->orWhere('user.first_name', 'like', "%{$text}%");
+            // });
+        }
 
         return view('order.index', [
-            'orders' => $orders,
-            'shops' => $shops,
+            'orders' => $orders->get(),
+            'shops' => Shop::all(),
         ]);
     }
 
-    public function completes()
+    public function completes(Request $request)
     {
         $orders = Order::query()
-                       ->whereIn('status', ['complete_apppayed', 'complete_shoppayed', 'complete_canceled'])
-                       ->get();
-        $shops = Shop::all();
+            ->whereIn('status', ['complete_apppayed', 'complete_shoppayed', 'complete_canceled']);
 
         // ToDo:
         // 1週間分のデータを取得
         // シーダーも直近1週間前後のデータを作成するように変更
 
+        $text = $request->query('text');
+        if (!empty($text)) {
+            $orders = $orders->where('number', 'like', "%{$text}%");
+
+            // ToDo: Implement search by user name
+            //
+            // $orders = $orders->where(function ($query) use ($text) {
+            //     $query->where('number', 'like', "%{$text}%")
+            //         ->orWhere('user.last_name', 'like', "%{$text}%")
+            //         ->orWhere('user.first_name', 'like', "%{$text}%");
+            // });
+        }
+
         return view('order.index', [
-            'orders' => $orders,
-            'shops' => $shops,
+            'orders' => $orders->get(),
+            'shops' => Shop::all(),
         ]);
     }
 
