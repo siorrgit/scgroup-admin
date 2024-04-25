@@ -34,6 +34,8 @@ class User extends Authenticatable
         'active',
         'email',
         'password',
+        'onetime_token',
+        'onetime_token_expiration',
     ];
 
     /**
@@ -44,6 +46,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'onetime_token',
+        'onetime_token_expiration',
     ];
 
     /**
