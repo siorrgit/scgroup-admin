@@ -75,12 +75,12 @@
             required />
         </div>
         <div class="flex justify-start items-start gap-x-5 p-2 w-full">
-          <x-forms.label for="holiday" class="w-32" :value="__('定休日：')" />
-          <x-forms.textarea id="holiday" name="holiday" value="{{ $shop ? $shop->holiday : '' }}" />
-        </div>
-        <div class="flex justify-start items-start gap-x-5 p-2 w-full">
           <x-forms.label for="hours" class="w-32" :value="__('営業時間：')" />
           <x-forms.textarea id="hours" name="hours" value="{{ $shop ? $shop->hours : '' }}" />
+        </div>
+        <div class="flex justify-start items-start gap-x-5 p-2 w-full">
+          <x-forms.label for="holiday" class="w-32" :value="__('定休日：')" />
+          <x-forms.textarea id="holiday" name="holiday" value="{{ $shop ? $shop->holiday : '' }}" />
         </div>
         <div class="flex justify-start items-start gap-x-5 p-2 w-full">
           <x-forms.label for="note" class="w-32" :value="__('備考：')" />
