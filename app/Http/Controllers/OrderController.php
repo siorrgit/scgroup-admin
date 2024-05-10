@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Shop;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -66,6 +67,7 @@ class OrderController extends Controller
 
         return view('order.detail', [
             'order' => $order,
+            'recipes' => Recipe::where('order_id', $id)->get(),
         ]);
     }
 

@@ -142,12 +142,13 @@
       <div class="flex justify-start items-start gap-x-5 p-2 w-full border-t">
         <div class="w-2/6 text-base">処方せん</div>
         <div class="flex flex-col gap-y-5 w-4/6 text-base">
-          @for ($i = 0; $i < 5; $i++)
+          @foreach ($recipes as $recipe)
             <div class="w-full border">
-              <a href="/assets/img/recipe/sample.jpg" target="_blank"><img class="w-full"
-                  src="/assets/img/recipe/sample.jpg" alt="" /></a>
+                <a href="{{ $recipe->image }}" target="_blank">
+                <img class="w-full" src="{{ $recipe->image }}" alt="" />
+                </a>
             </div>
-          @endfor
+          @endforeach
         </div>
       </div>
     </div>
