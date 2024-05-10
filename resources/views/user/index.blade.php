@@ -36,6 +36,7 @@
               <table class="table-auto w-full text-left whitespace-no-wrap">
                 <thead>
                   <tr class="bg-gray-100">
+                    <th class="px-4 py-3 tracking-wider text-base font-bold">ステータス</th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold">登録日</th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold">姓</th>
                     <th class="px-4 py-3 tracking-wider text-base font-bold">名</th>
@@ -45,6 +46,11 @@
                 <tbody>
                   @foreach ($i->users as $user)
                     <tr>
+                      <td class="px-4 py-3 text-base flex items-center">
+                        @if (!empty($user->deleted_at))
+                          <span class="flex justify-center items-center w-12 rounded text-sm bg-red-300 px-2 py-1">無効</span>
+                        @endif
+                      </td>
                       <td class="px-4 py-3 text-base">{{ \Carbon\Carbon::createFromTimeString($user->created_at)->format('Y/m/d') }}</td>
                       <td class="px-4 py-3 text-base">{{ $user->last_name }}</td>
                       <td class="px-4 py-3 text-base">{{ $user->first_name }}</td>
