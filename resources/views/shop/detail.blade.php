@@ -10,8 +10,18 @@
       </h1>
 
       @if ($shop)
+        @if(session('status') == 'shop-deleted')
+            <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)" class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">{{ __('店舗を無効化しました。') }}</div>
+        @elseif (session('status') == 'shop-activated')
+            <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)" class="block w-full max-w-[600px] bg-keyBlue rounded-md text-sm text-white font-bold text-center mt-10 mx-auto p-3">{{ __('店舗を有効化しました。') }}</div>
+        @endif
+
         <div class="flex justify-end mt-10">
-          <x-danger-button class="text-m">無効化</x-danger-button>
+            @if ($shop->is_active)
+                <x-danger-button class="text-m" type="button" onclick="modalOpen('delete')">無効化</x-danger-button>
+            @else
+                <x-primary-button class="text-m" type="button" onclick="modalOpen('activate')">有効化</x-primary-button>
+            @endif
         </div>
       @endif
 
@@ -107,4 +117,73 @@
       </form>
     </div>
   </section>
+
+  {{-- Modals --}}
+  <div id="modal" class="hidden justify-center items-center w-[100vw] h-[100vh] fixed top-0 left-0 z-10">
+    <div id="modal-overlay" class="block w-full h-full bg-[rgba(0,0,0,.5)] absolute top-0 left-0"></div>
+
+    <div id="modal-content"
+      class="modal-content block w-[80vw] max-w-[600px] aspect-video bg-white rounded-md relative">
+      <button id="modal-close"
+        class="w-[30px] h-[30px] rounded-full bg-black absolute top-[-15px] right-[-15px] cursor-pointer"
+        type="button">
+        <i class="block w-[20px] h-[1px] bg-white absolute top-0 right-0 bottom-0 left-0 m-auto rotate-45"></i>
+        <i class="block w-[20px] h-[1px] bg-white absolute top-0 right-0 bottom-0 left-0 m-auto -rotate-45"></i>
+      </button>
+      @if ($shop)
+      <div id="modal-body">
+        <div id="modal-delete" class="modal-i hidden p-10">
+          <form method="post" action="{{ url('/shop/destroy/' . $shop->id) }}">
+            @csrf
+            @method('PUT')
+            <div class="text-2xl font-bold text-center">店舗無効化</div>
+            <div class="text-center mt-5">この店舗を無効化します。<br />本当によろしいですか？</div>
+            <div class="flex justify-center w-full mt-20">
+              <x-danger-button class="text-m min-w-[100px] justify-center">送信</x-danger-button>
+            </div>
+          </form>
+        </div>
+        <div id="modal-activate" class="modal-i hidden p-10">
+          <form method="post" action="{{ url('/shop/activate/' . $shop->id) }}">
+            @csrf
+            @method('PUT')
+            <div class="text-2xl font-bold text-center">店舗有効化</div>
+            <div class="text-center mt-5">この店舗を有効化します。<br />本当によろしいですか？</div>
+            <div class="flex justify-center w-full mt-20">
+              <x-primary-button class="text-m min-w-[100px] justify-center">送信</x-primary-button>
+            </div>
+          </form>
+        </div>
+      </div>
+      @endif
+    </div>
+  </div>
 </x-app-layout>
+
+<script>
+    const modal = document.getElementById('modal')
+    const modalOverlay = document.getElementById('modal-overlay')
+    const modalCloseBtn = document.getElementById('modal-close')
+
+    const modalOpen = (type) => {
+      const targetModal = document.getElementById(`modal-${type}`)
+
+      targetModal.classList.remove('hidden')
+      targetModal.classList.add('block')
+      modal.classList.remove('hidden')
+      modal.classList.add('flex')
+    }
+
+    const closeModal = () => {
+      const modalItems = document.querySelectorAll('.modal-i')
+      modalItems.forEach(i => {
+        i.classList.remove('block')
+        i.classList.add('hidden')
+      });
+      modal.classList.remove('flex')
+      modal.classList.add('hidden')
+
+    }
+    modalOverlay.addEventListener('click', closeModal)
+    modalCloseBtn.addEventListener('click', closeModal)
+  </script>

@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/shop/add', [ShopController::class, 'create']);
     Route::post('/shop/add', [ShopController::class, 'store']);
     Route::put('/shop/{id}', [ShopController::class, 'update']);
+    Route::put('/shop/destroy/{id}', [ShopController::class, 'destroy']);
+    Route::put('/shop/activate/{id}', [ShopController::class, 'activate']);
 
     // 処方せん（未完了）
     Route::get('/incomplete', [OrderController::class, 'incompletes']);

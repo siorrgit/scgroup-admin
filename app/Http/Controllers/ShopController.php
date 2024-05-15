@@ -89,4 +89,22 @@ class ShopController extends Controller
 
         return redirect('/shop/' . $shop->id);
     }
+
+    public function destroy(Request $request, string $id)
+    {
+        $shop = Shop::find($id);
+        $shop->is_active = false;
+        $shop->save();
+
+        return redirect('/shop/' . $shop->id)->with(['status' => 'shop-deleted']);
+    }
+
+    public function activate(Request $request, string $id)
+    {
+        $shop = Shop::find($id);
+        $shop->is_active = true;
+        $shop->save();
+
+        return redirect('/shop/' . $shop->id)->with(['status' => 'shop-activated']);
+    }
 }
