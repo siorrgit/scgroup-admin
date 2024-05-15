@@ -16,15 +16,17 @@ class OrderController extends Controller
 
         $text = $request->query('text');
         if (!empty($text)) {
-            $orders = $orders->where('number', 'like', "%{$text}%");
-
-            // ToDo: Implement search by user name
-            //
-            // $orders = $orders->where(function ($query) use ($text) {
-            //     $query->where('number', 'like', "%{$text}%")
-            //         ->orWhere('user.last_name', 'like', "%{$text}%")
-            //         ->orWhere('user.first_name', 'like', "%{$text}%");
-            // });
+            $orders = $orders->where(function ($query) use ($text) {
+                $query->where('number', 'like', "%{$text}%")
+                    ->orWhere('guest_last_name', 'like', "%{$text}%")
+                    ->orWhere('guest_first_name', 'like', "%{$text}%")
+                    ->orWhere(function ($query) use ($text) {
+                        $query->whereHas('user', function ($query) use ($text) {
+                            $query->where('last_name', 'LIKE', "%{$text}%")
+                                ->orWhere('first_name', 'LIKE', "%{$text}%");
+                        });
+                    });
+            });
         }
 
         return view('order.index', [
@@ -44,15 +46,17 @@ class OrderController extends Controller
 
         $text = $request->query('text');
         if (!empty($text)) {
-            $orders = $orders->where('number', 'like', "%{$text}%");
-
-            // ToDo: Implement search by user name
-            //
-            // $orders = $orders->where(function ($query) use ($text) {
-            //     $query->where('number', 'like', "%{$text}%")
-            //         ->orWhere('user.last_name', 'like', "%{$text}%")
-            //         ->orWhere('user.first_name', 'like', "%{$text}%");
-            // });
+            $orders = $orders->where(function ($query) use ($text) {
+                $query->where('number', 'like', "%{$text}%")
+                    ->orWhere('guest_last_name', 'like', "%{$text}%")
+                    ->orWhere('guest_first_name', 'like', "%{$text}%")
+                    ->orWhere(function ($query) use ($text) {
+                        $query->whereHas('user', function ($query) use ($text) {
+                            $query->where('last_name', 'LIKE', "%{$text}%")
+                                ->orWhere('first_name', 'LIKE', "%{$text}%");
+                        });
+                    });
+            });
         }
 
         return view('order.index', [
