@@ -64,8 +64,7 @@
 
       @if (!empty($order->user))
         <div class="flex items-center justify-end w-full mb-2">
-          <a href="{{ '/user/' . $order->user->id . '#chat' }}"><img class="w-8 h-8"
-              src="/assets/img/global/icons/mail.svg" alt="" /></a>
+          <a href="{{ '/user/' . $order->user->id . '#chat' }}"><img class="w-8" src="/assets/img/global/icons/chat.svg" alt="" /></a>
         </div>
       @else
         <div class="flex items-center gap-x-5 w-full mb-2">

@@ -9,9 +9,8 @@
             <table class="table-auto w-full text-left whitespace-no-wrap">
               <thead>
                 <tr class="bg-gray-100">
-                  <th class="px-4 py-3 tracking-wider text-base font-bold">無効</th>
-                  <th class="px-4 py-3 tracking-wider text-base font-bold">エリア
-                  </th>
+                  <th class="px-4 py-3 tracking-wider text-base font-bold">ステータス</th>
+                  <th class="px-4 py-3 tracking-wider text-base font-bold">エリア</th>
                   <th class="px-4 py-3 tracking-wider text-base font-bold">ID</th>
                   <th class="px-4 py-3 tracking-wider text-base font-bold">店舗名</th>
                   <th class="px-4 py-3 tracking-wider text-base font-bold">詳細</th>
@@ -20,7 +19,11 @@
               <tbody>
                 @foreach ($shops as $shop)
                 <tr>
-                    <td class="px-4 py-3 text-base"></td>
+                    <td class="px-4 py-3 text-base flex items-center">
+                        @if (!$shop->is_active)
+                            <span class="flex justify-center items-center w-12 rounded text-sm bg-red-300 px-2 py-1">無効</span>
+                        @endif
+                    </td>
                     <td class="px-4 py-3 text-base">{{ $shop->area->name }}</td>
                     <td class="px-4 py-3 text-base">{{ $shop->id }}</td>
                     <td class="px-4 py-3 text-base">{{ $shop->name }}</td>
