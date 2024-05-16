@@ -19,8 +19,10 @@ return new class extends Migration
             $table->foreign('shop_id')
                 ->references('id')
                 ->on('shops');
-            $table->string('sender'); // user / shop
-            $table->text('body')->nullable();
+            $table->char('sender', 4); // user / shop
+            $table->char('type', 4); // text / img
+            $table->text('text')->nullable();
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }
