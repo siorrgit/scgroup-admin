@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Recipe;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,10 +27,15 @@ class Order extends Model
         'guest_email',
         'guest_phone',
         'shop_id',
+        'is_spot',
         'receiving_at',
         'received_at',
         'status',
         'message',
+    ];
+
+    protected $casts = [
+        'is_spot' => 'boolean',
     ];
 
     /**
@@ -37,6 +44,14 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Shop relationship.
+     */
+    public function shop(): BelongsTo
+    {
+        return $this->belongsTo(Shop::class);
     }
 
     /**

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('guest_email')->nullable();
             $table->string('guest_phone')->nullable();
             $table->string('shop_id')->references('id')->on('shops');
+            $table->boolean('is_spot')->default(false);
             $table->dateTime('receiving_at')->nullable();
             $table->dateTime('received_at')->nullable();
             $table->string('status');
