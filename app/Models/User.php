@@ -36,6 +36,7 @@ class User extends Authenticatable
         'password',
         'onetime_token',
         'onetime_token_expiration',
+        'stripe_id',
     ];
 
     /**
