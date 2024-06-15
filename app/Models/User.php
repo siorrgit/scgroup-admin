@@ -38,6 +38,7 @@ class User extends Authenticatable
         'onetime_token_expiration',
         'stripe_customer_id',
         'stripe_paymentmethod_id',
+        'stripe_cc_last4',
     ];
 
     /**

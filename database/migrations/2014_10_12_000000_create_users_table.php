@@ -32,6 +32,7 @@ return new class extends Migration
             $table->dateTime('onetime_token_expiration')->nullable();
             $table->string('stripe_customer_id');
             $table->string('stripe_paymentmethod_id')->nullable();
+            $table->string('stripe_cc_last4')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
