@@ -31,6 +31,7 @@ class Order extends Model
         'receiving_at',
         'received_at',
         'status',
+        'sent_at',
         'message',
     ];
 
