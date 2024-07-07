@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('birth_day');
             $table->string('phone');
             $table->string('shop_id')->references('id')->on('shops')->nullable();
-            $table->boolean('notification')->default(true);
+            $table->boolean('notification')->nullable();
             $table->boolean('active')->default(true);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
