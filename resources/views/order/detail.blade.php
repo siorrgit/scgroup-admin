@@ -123,7 +123,7 @@
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
         <div class="w-2/6 text-base">お受け取り希望日</div>
         <div class="w-4/6 text-base">
-          {{ \Carbon\Carbon::createFromTimeString($order->receiving_at)->format('Y/m/d') }}
+          {{ $order->receiving_at ? \Carbon\Carbon::createFromTimeString($order->receiving_at)->format('Y/m/d') : '' }}
         </div>
       </div>
       <div class="flex justify-start items-center gap-x-5 p-2 w-full border-t">
