@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // 開発者用ページ
-    Route::get('/developer', [DeveloperController::class, 'index']);
+    // Route::get('/developer', [DeveloperController::class, 'index']);
 });
 
 require __DIR__.'/auth.php';
