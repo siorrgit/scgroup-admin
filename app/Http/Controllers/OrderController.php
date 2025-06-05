@@ -84,15 +84,6 @@ class OrderController extends Controller
         return redirect("/order/{$id}")->with(['status' => 'order-notified']);
     }
 
-    public function apppay(string $id)
-    {
-        $order = Order::find($id);
-        $order->status = 'complete_apppayed';
-        $order->save();
-
-        return redirect("/order/{$id}")->with(['status' => 'order-apppayed']);
-    }
-
     public function shoppay(string $id)
     {
         $order = Order::find($id);

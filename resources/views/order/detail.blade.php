@@ -13,7 +13,6 @@
       <div class="flex justify-center gap-x-3 max-w-[600px] mx-auto mt-10">
         @if (!empty($order->user))
           <x-primary-button type="button" onclick="modalOpen('request')" class="text-m">来店依頼</x-primary-button>
-          <x-primary-button type="button" onclick="modalOpen('apppay')" class="text-m">事前登録決済実行</x-primary-button>
         @endif
         <x-primary-button type="button" onclick="modalOpen('shoppay')" class="text-m">店頭決済完了</x-primary-button>
         <x-danger-button type="button" onclick="modalOpen('cancel')" class="text-m">キャンセル</x-danger-button>
@@ -181,37 +180,6 @@
             </form>
           </div>
         </div>
-        <div id="modal-apppay" class="modal-i hidden p-10">
-          <div class="text-2xl font-bold text-center">事前登録決済実行</div>
-          <div class="text-center mt-5">
-            {{ $order->user->last_name . ' ' . $order->user->first_name }}さんへの請求金額を入力してください。
-          </div>
-          <div class="flex justify-center flex-wrap w-full mt-10">
-            <form id="apppayForm" method="post" action="{{ url('/order/apppay/' . $order->id) }}" class="flex flex-col justify-center">
-              @csrf
-              @method('put')
-              <div class="flex justify-center items-center gap-x-3 w-full">
-                <x-forms.text-input id="priceInput" name="price" pattern="^[0-9]+$" class="w-[200px]" required />
-                <span class="text-base font-bold">円</span>
-              </div>
-              <x-primary-button class="text-m min-w-[100px] mt-10">確認</x-primary-button>
-            </form>
-          </div>
-        </div>
-        <div id="modal-apppay-confirm" class="modal-i hidden p-10">
-            <div class="text-2xl font-bold text-center">事前登録決済実行</div>
-            <div class="text-center mt-5 text-lg font-bold">
-                {{ $order->user->last_name . ' ' . $order->user->first_name }}さんへ
-                <br />
-                {{ \Carbon\Carbon::now()->format('m月d日') }}付けで
-                <br />
-                <span id="priceSpan"></span>円の決済を実行します。
-            </div>
-            <div class="flex justify-center flex-wrap w-full mt-10">
-                <x-primary-button type="button" class="text-m min-w-[100px] mt-10"
-                onclick="apppay()">決済実行</x-primary-button>
-            </div>
-        </div>
         @endif
         <div id="modal-shoppay" class="modal-i hidden p-10">
           <form method="post" action="{{ url('/order/shoppay/' . $order->id) }}">
@@ -259,9 +227,6 @@
 
   const modalOpen = (type) => {
     closeModal()
-    if (type === 'apppay') {
-      apppayClear()
-    }
     const targetModal = document.getElementById(`modal-${type}`)
 
     targetModal.classList.remove('hidden')
@@ -281,24 +246,4 @@
   }
   modalOverlay.addEventListener('click', closeModal)
   modalCloseBtn.addEventListener('click', closeModal)
-
-  // 事前決済
-  const apppayForm = document.getElementById('apppayForm')
-  const priceInput = document.getElementById('priceInput')
-  const priceSpan = document.getElementById('priceSpan')
-
-  apppayForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    priceSpan.innerHTML = priceInput.value
-    modalOpen('apppay-confirm')
-  })
-
-  const apppay = () => {
-    apppayForm.submit()
-  }
-
-  const apppayClear = () => {
-    priceInput.value = ''
-    priceSpan.innerHTML = ''
-  }
 </script>
