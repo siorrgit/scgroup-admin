@@ -1,19 +1,18 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Console\Scheduling\Schedule;
 
-/*
-|--------------------------------------------------------------------------
-| Console Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of your Closure based console
-| commands. Each Closure is bound to a command instance allowing a
-| simple approach to interacting with each command's IO methods.
-|
-*/
-
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Schedule::command('backup:clean')->daily()->at('00:00');
+    // ->onSuccess(function () {
+    //     \Log::info('Backup clean completed successfully.');
+    // })
+    // ->onFailure(function () {
+    //     \Log::error('Backup clean failed.');
+    // });
+Schedule::command('backup:run --only-db')->daily()->at('00:30');
+    // ->onSuccess(function () {
+    //     \Log::info('Backup completed successfully.');
+    // })
+    // ->onFailure(function () {
+    //     \Log::error('Backup failed.');
+    // });
